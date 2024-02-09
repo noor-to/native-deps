@@ -1,4 +1,4 @@
-# Spacedrive native dependencies
+# Noor native dependencies (forked from Spacedrive's work)
 
 ## Build instructions
 

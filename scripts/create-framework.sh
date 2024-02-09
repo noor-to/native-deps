@@ -14,9 +14,9 @@ if [ -z "${VERSION:-}" ]; then
   VERSION="0.0.0"
 fi
 
-# Create Spacedrive.framework
+# Create.framework
 # https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPFrameworks/Concepts/FrameworkAnatomy.html
-_framework="Spacedrive.framework"
+_framework="Noor.framework"
 
 # Create basic structure
 mkdir -p "${OUT:?Missing out dir}/${_framework}/Versions/A/Resources"
@@ -75,15 +75,15 @@ cat <<EOF >"${OUT}/${_framework}/Versions/Current/Resources/Info.plist"
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
     <key>CFBundleExecutable</key>
-    <string>Spacedrive</string>
+    <string>Noor</string>
     <key>CFBundleGetInfoString</key>
-    <string>Spacedrive Native Dependencies ${VERSION}</string>
+    <string>Noor Native Dependencies ${VERSION}</string>
     <key>CFBundleIdentifier</key>
-    <string>com.spacedrive</string>
+    <string>com.usenoor</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
-    <string>Spacedrive</string>
+    <string>Noor</string>
     <key>CFBundlePackageType</key>
     <string>FMWK</string>
     <key>CFBundleShortVersionString</key>
@@ -93,7 +93,7 @@ cat <<EOF >"${OUT}/${_framework}/Versions/Current/Resources/Info.plist"
     <key>CFBundleVersion</key>
     <string>${VERSION}</string>
     <key>NSHumanReadableCopyright</key>
-	  <string>Copyright (c) 2021-present Spacedrive Technology Inc.</string>
+	  <string>Copyright (c) 2021-present Noor.</string>
 </dict>
 </plist>
 EOF
@@ -110,7 +110,7 @@ cat <<EOF >"${OUT}/${_framework}/Versions/Current/Resources/version.plist"
         <key>CFBundleVersion</key>
         <string>${VERSION}</string>
         <key>ProjectName</key>
-        <string>Spacedrive</string>
+        <string>Noor</string>
         <key>SourceVersion</key>
         <string>$(date '+%Y%m%d%H%M%S')</string>
 </dict>

@@ -427,23 +427,23 @@ RUN --mount=type=cache,target=/root/.cache `
 	--mount=type=bind,source=stages/99-protoc.sh,target=/srv/stage.sh `
 	/srv/build.sh
 
-FROM layer-00 AS layer-99-pdfium
+# FROM layer-00 AS layer-99-pdfium
 
-RUN --mount=type=cache,target=/root/.cache `
-	--mount=type=bind,source=stages/99-pdfium.sh,target=/srv/stage.sh `
-	/srv/build.sh
+# RUN --mount=type=cache,target=/root/.cache `
+# 	--mount=type=bind,source=stages/99-pdfium.sh,target=/srv/stage.sh `
+# 	/srv/build.sh
 
-FROM layer-00 AS layer-99-yolo
+# FROM layer-00 AS layer-99-yolo
 
-RUN --mount=type=cache,target=/root/.cache `
-	--mount=type=bind,source=stages/99-yolov8.sh,target=/srv/stage.sh `
-	/srv/build.sh
+# RUN --mount=type=cache,target=/root/.cache `
+# 	--mount=type=bind,source=stages/99-yolov8.sh,target=/srv/stage.sh `
+# 	/srv/build.sh
 
-FROM layer-20 AS layer-99-onnx
+# FROM layer-20 AS layer-99-onnx
 
-RUN --mount=type=cache,target=/root/.cache `
-	--mount=type=bind,source=stages/99-onnx.sh,target=/srv/stage.sh `
-	/srv/build.sh
+# RUN --mount=type=cache,target=/root/.cache `
+# 	--mount=type=bind,source=stages/99-onnx.sh,target=/srv/stage.sh `
+# 	/srv/build.sh
 
 FROM layer-50 AS layer-99-ffmpeg
 
@@ -468,14 +468,14 @@ COPY --from=layer-99-heif "${PREFIX}/licenses/." "${OUT}/licenses"
 COPY --from=layer-99-protoc "${OUT}/." "$OUT"
 COPY --from=layer-99-protoc "${PREFIX}/licenses/." "${OUT}/licenses"
 
-COPY --from=layer-99-pdfium "${OUT}/." "$OUT"
-COPY --from=layer-99-pdfium "${PREFIX}/licenses/." "${OUT}/licenses"
+# COPY --from=layer-99-pdfium "${OUT}/." "$OUT"
+# COPY --from=layer-99-pdfium "${PREFIX}/licenses/." "${OUT}/licenses"
 
-COPY --from=layer-99-yolo "${OUT}/." "$OUT"
+# COPY --from=layer-99-yolo "${OUT}/." "$OUT"
 
-COPY --from=layer-99-onnx "${OUT}/." "$OUT"
-COPY --from=layer-99-onnx "${PREFIX}/srv/." "${OUT}/srv"
-COPY --from=layer-99-onnx "${PREFIX}/licenses/." "${OUT}/licenses"
+# COPY --from=layer-99-onnx "${OUT}/." "$OUT"
+# COPY --from=layer-99-onnx "${PREFIX}/srv/." "${OUT}/srv"
+# COPY --from=layer-99-onnx "${PREFIX}/licenses/." "${OUT}/licenses"
 
 COPY --from=layer-99-ffmpeg "${OUT}/." "$OUT"
 COPY --from=layer-99-ffmpeg "${PREFIX}/srv/." "${OUT}/srv"

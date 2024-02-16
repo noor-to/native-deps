@@ -52,8 +52,8 @@ mv "${OUT}/include" "${OUT}/${_framework}/Versions/A/Headers"
 # Move licenses to Framework
 mv "${OUT}/licenses" "${OUT}/${_framework}/Versions/A/Resources/Licenses"
 
-# Move models to Framework
-mv "${OUT}/models" "${OUT}/${_framework}/Versions/A/Resources/Models"
+# # Move models to Framework
+# mv "${OUT}/models" "${OUT}/${_framework}/Versions/A/Resources/Models"
 
 # Create required framework symlinks
 ln -s A "${OUT}/${_framework}/Versions/Current"

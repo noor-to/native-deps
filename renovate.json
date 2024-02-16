@@ -1,0 +1,96 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+
+    ":label(type/renovate)",
+
+    ":docker",
+    "docker:enableMajor",
+    "docker:pinDigests",
+
+    ":disableRateLimiting",
+    ":ignoreUnstable",
+    ":pinVersions",
+    ":separateMajorReleases",
+    ":automergePr",
+    ":automergeRequireAllStatusChecks",
+    ":automergeAll",
+    ":semanticCommits",
+
+    ":enableVulnerabilityAlerts",
+    ":enableVulnerabilityAlertsWithLabel(security)"
+  ],
+
+  "rebaseWhen": "conflicted",
+  "platformAutomerge": true,
+  "rebaseLabel": "renovate/rebase",
+  "stopUpdatingLabel": "renovate/stop-updating",
+
+  "major": { "labels": ["bump/major"] },
+  "minor": { "labels": ["bump/minor"] },
+  "patch": { "labels": ["bump/patch"] },
+  "pin": { "labels": ["bump/pin"] },
+  "digest": { "labels": ["bump/digest"] },
+
+  "regexManagers": [
+    {
+      "fileMatch": ["^stages/.*\\.sh$"],
+      "matchStrings": [
+        "#\\s*renovate:\\s*datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?( registryUrl=(?<registryUrl>.*?))?\\n_tag='(?<currentValue>.*)'\\s"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    },
+    {
+      "fileMatch": ["^stages/.*\\.sh$"],
+      "matchStrings": [
+        "#\\s*renovate:\\s*depName=(?<depName>.*?)\\n_commit='(?<currentValue>)(?<currentDigest>.*?)'"
+      ],
+      "versioningTemplate": "git",
+      "datasourceTemplate": "git-refs"
+    },
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": [
+        "#\\s*renovate:\\s*datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?( registryUrl=(?<registryUrl>.*?))?\\n(ENV|ARG) .*?_VERSION='(?<currentValue>.*)'\\s"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    }
+  ],
+
+  "packageRules": [
+    {
+      "packageNames": [
+        "Kitware/CMake",
+        "DLTcollab/sse2neon",
+        "tukaani-project/xz",
+        "xiph/ogg",
+        "strukturag/libde265",
+        "xiph/vorbis",
+        "Fintel/libvpl",
+        "xiph/opus",
+        "AOMediaCodec/SVT-AV1",
+        "strukturag/libheif",
+        "protocolbuffers/protobuf",
+        "microsoft/onnxruntime"
+      ],
+      "extractVersion": "^v(?<version>.+)$"
+    },
+    {
+      "packageNames": ["mm2/Little-CMS"],
+      "extractVersion": "^lcms(?<version>.+)$"
+    },
+    {
+      "packageNames": ["FFmpeg/nv-codec-headers"],
+      "extractVersion": "^n(?<version>.+)$"
+    },
+    {
+      "packageNames": ["sekrit-twc/zimg"],
+      "extractVersion": "^release-(?<version>.+)$"
+    },
+    {
+      "packageNames": ["bblanchon/pdfium-binaries"],
+      "extractVersion": "^chromium/(?<version>.+)$"
+    }
+  ]
+}

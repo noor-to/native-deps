@@ -7,9 +7,9 @@ ARG VERSION="0.0.0"
 # renovate: datasource=github-releases depName=ziglang/zig
 ARG ZIG_VERSION='0.11.0'
 # renovate: datasource=github-releases depName=mesonbuild/meson
-ARG MESON_VERSION='1.3.2'
+ARG MESON_VERSION='1.4.0'
 # renovate: datasource=github-releases depName=Kitware/CMake
-ARG CMAKE_VERSION='3.28.3'
+ARG CMAKE_VERSION='3.29.3'
 # renovate: datasource=github-releases depName=NixOS/patchelf
 ARG PATCHELF_VERSION='0.18.0'
 # renovate: datasource=github-releases depName=joseluisq/macosx-sdks
@@ -17,7 +17,7 @@ ARG MACOS_SDK_VERSION='14.2'
 
 #--
 
-FROM debian:bookworm@sha256:4482958b4461ff7d9fabc24b3a9ab1e9a2c85ece07b2db1840c7cbc01d053e90 as build-base
+FROM debian:bookworm@sha256:fac2c0fd33e88dfd3bc88a872cfb78dcb167e74af6162d31724df69e482f886c AS build-base
 
 SHELL ["bash", "-euxo", "pipefail", "-c"]
 
@@ -78,7 +78,7 @@ COPY --chmod=0750 ./scripts/curl_tar.sh "${SYSROOT}/bin/curl_tar"
 # Download and install zig toolchain
 ARG ZIG_VERSION
 RUN --mount=type=cache,target=/root/.cache `
-	curl_tar "https://ziglang.org/builds/zig-linux-$(uname -m)-${ZIG_VERSION:?}.tar.xz" "$SYSROOT" 1 `
+	curl_tar "https://ziglang.org/download/${ZIG_VERSION:?}/zig-linux-$(uname -m)-${ZIG_VERSION:?}.tar.xz" "$SYSROOT" 1 `
 	&& mv "${SYSROOT}/zig" "${SYSROOT}/bin/zig"
 
 # Download and install cmake
